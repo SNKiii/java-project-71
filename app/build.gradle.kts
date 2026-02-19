@@ -19,6 +19,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("info.picocli:picocli:4.7.7")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.19.+")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
 }
 
 kapt {

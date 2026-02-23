@@ -1,6 +1,7 @@
 plugins {
     id("application")
     id("org.jetbrains.kotlin.kapt") version "1.9.22"
+    id("checkstyle")
 }
 
 group = "org.example"
@@ -8,6 +9,10 @@ version = "1.0-SNAPSHOT"
 
 application{
     mainClass.set("hexlet.code.App")
+}
+
+checkstyle {
+    toolVersion = "10.12.4"
 }
 
 repositories {

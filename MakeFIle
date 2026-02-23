@@ -1,0 +1,8 @@
+.PHONY: run-dist
+.PHONY: run-pinci
+
+run-dist:
+	build/install/app/bin/app
+
+run-pinci:
+	./build/install/app/bin/app -h

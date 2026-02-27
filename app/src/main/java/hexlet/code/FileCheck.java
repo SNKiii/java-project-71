@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Map;
 
  class FileCheck {
-     public static Map<String, Object> checkFile(String file) throws IOException {
+     public static Map<String, Object> checkFile(String file) {
          ObjectMapper mapper = new ObjectMapper();
          if (file == null || file.isEmpty()) {
              return null;
@@ -16,7 +16,6 @@ import java.util.Map;
              File newFile = new File(file);
              Map<String, Object> stringObjectMap = mapper.readValue(newFile, new TypeReference<Map<String, Object>>() {
              });
-            ;
              return stringObjectMap;
          } catch (IOException e) {
              System.err.println("Ошибка чтения JSON: " + e.getMessage());

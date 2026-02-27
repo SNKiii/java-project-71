@@ -9,14 +9,15 @@ import java.util.Map;
  class FileCheck {
      public static Map<String, Object> checkFile(String file) throws IOException {
          ObjectMapper mapper = new ObjectMapper();
-         if (file == null || file == "") {
+         if (file == null || file.isEmpty()) {
              return null;
          }
          try {
              File newFile = new File(file);
-             Map<String, Object> result = mapper.readValue(newFile, new TypeReference<Map<String, Object>>() {
+             Map<String, Object> stringObjectMap = mapper.readValue(newFile, new TypeReference<Map<String, Object>>() {
              });
-             return result;
+            ;
+             return stringObjectMap;
          } catch (IOException e) {
              System.err.println("Ошибка чтения JSON: " + e.getMessage());
              e.printStackTrace();

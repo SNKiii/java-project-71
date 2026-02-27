@@ -2,6 +2,7 @@ plugins {
     id("application")
     id("org.jetbrains.kotlin.kapt") version "1.9.22"
     id("checkstyle")
+    id("org.sonarqube") version "7.1.0.6387"
 }
 
 group = "org.example"
@@ -9,6 +10,13 @@ version = "1.0-SNAPSHOT"
 
 application{
     mainClass.set("hexlet.code.App")
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "SNKiii_java-project-71")
+        property("sonar.organization", "snkiii")
+    }
 }
 
 checkstyle {

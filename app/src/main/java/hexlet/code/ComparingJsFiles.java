@@ -10,24 +10,32 @@ public class ComparingJsFiles {
             var mapJsonOne = FileCheck.checkFile(jsonOne);
             var mapJsonTwo = FileCheck.checkFile(jsonTwo);
 
-        mapJsonOne.forEach((key, value) -> {
-              if (mapJsonTwo.containsKey(key)) {
-                  if (mapJsonOne.get(key).equals(mapJsonTwo.get(key))) {
-                      comparList.add("  " + key + ": " + value);
-                      mapJsonTwo.remove(key);
+        if (mapJsonOne != null) {
+            mapJsonOne.forEach((key, value) -> {
+                String valueStr = value.toString();
+                if (valueStr == null || valueStr.trim().isEmpty() || key == null || key.trim().isEmpty()) {
+                    return;
+                }
+                if (mapJsonTwo != null && mapJsonTwo.containsKey(key)) {
+                      if (mapJsonOne.get(key).equals(mapJsonTwo.get(key))) {
+                          comparList.add("  " + key + ": " + value);
+                          mapJsonTwo.remove(key);
+                      } else {
+                          // /abc1 - an abbreviation that indicates that the string refers to the first json file.
+                          comparList.add("- " + key + "/abc1: " + value);
+                          comparList.add("+ " + key + ": " + mapJsonTwo.get(key));
+                          mapJsonTwo.remove(key);
+                      }
                   } else {
-                      // /abc1 - an abbreviation that indicates that the string refers to the first json file.
-                      comparList.add("- " + key + "/abc1: " + value);
-                      comparList.add("+ " + key + ": " + mapJsonTwo.get(key));
-                      mapJsonTwo.remove(key);
+                      comparList.add("- " + key + ": " + value);
                   }
-              } else {
-                  comparList.add("- " + key + ": " + value);
-              }
-            });
+                });
+        }
+        if (mapJsonTwo != null) {
             mapJsonTwo.forEach((key, value) -> {
-            comparList.add("+ " + key + ": " +  value);
-            });
-            return comparList;
+                comparList.add("+ " + key + ": " +  value);
+                });
+        }
+        return comparList;
     }
 }

@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ComparingJsFiles {
-    public static List<String> comparing(String jsonOne, String jsonTwo) throws IOException {
+    public static List<String> comparing(String fileOne, String fikeTwo) throws IOException {
             List<String> comparList = new ArrayList<>();
-            var mapJsonOne = FileCheck.checkFile(jsonOne);
-            var mapJsonTwo = FileCheck.checkFile(jsonTwo);
+            var mapJsonOne = Parser.checkFormatFile(fileOne);
+            var mapJsonTwo = Parser.checkFormatFile(fikeTwo);
 
         if (mapJsonOne != null) {
             mapJsonOne.forEach((key, value) -> {

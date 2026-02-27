@@ -16,6 +16,7 @@ sonar {
     properties {
         property("sonar.projectKey", "SNKiii_java-project-71")
         property("sonar.organization", "snkiii")
+        property("sonar.host.url", "https://sonarcloud.io")
     }
 }
 

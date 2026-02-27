@@ -1,14 +1,15 @@
-import java.io.IOException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import hexlet.code.*;
+import hexlet.code.FilterList;
+
+import java.io.IOException;
 
 public class TestOne {
 
     @Test
     void indenticalTest() throws IOException {
-        String indenticalJsonFile = "C:\\Users\\Lenovo\\IdeaProjects\\java-project-7170\\app\\src\\test"
-                                    + "\\jsonTestFiles\\IndenticalFile.json";
+        String indenticalJsonFile = "C:\\Users\\Lenovo\\IdeaProjects\\java-project-7170\\app\\src\\test\\resources"
+                + "\\jsonTestFiles\\IndenticalFile.json";
             String trueString = """
                     follow: false
                     host: hexlet.io
@@ -20,13 +21,13 @@ public class TestOne {
 
     @Test
     void nullValuesTest() throws IOException {
-        String jsonOneFile = "C:\\Users\\Lenovo\\IdeaProjects\\java-project-7170\\app\\src\\test"
-                             + "\\jsonTestFiles\\trueJsonFile.json";
-        String jsonTwoFile = "C:\\Users\\Lenovo\\IdeaProjects\\java-project-7170\\app\\src\\test"
-                             + "\\jsonTestFiles\\falseJsonFile.json";
+        String jsonOneFile = "C:\\Users\\Lenovo\\IdeaProjects\\java-project-7170\\app\\src\\test\\resources"
+                + "\\jsonTestFiles\\trueJsonFile.json";
+        String jsonTwoFile = "C:\\Users\\Lenovo\\IdeaProjects\\java-project-7170\\app\\src\\test\\resources"
+                + "\\jsonTestFiles\\falseJsonFile.json";
         String trueString = """
                   keyOne: 12
-                + keyThree: 13  
+                + keyThree: 13
                   keyTwo: value
                 """;
         assertEquals(trueString, FilterList.sorted(jsonOneFile, jsonTwoFile));

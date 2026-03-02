@@ -9,7 +9,7 @@ import java.util.Map;
 
  class Parser {
 
-     public static Map<String, Object> checkFormatFile(String file) {
+     public static Object checkFormatFile(String file) {
          if (file.contains(".json")) {
              return checkJsonFile(file);
          } else if (file.contains("yaml")) {

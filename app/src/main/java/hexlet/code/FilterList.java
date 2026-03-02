@@ -9,7 +9,7 @@ import java.util.List;
 public class FilterList {
 public static String sorted(String jsonOne, String jsonTwo) throws IOException {
     String result = "";
-    List<String> newList = new ArrayList<>(ComparingJsFiles.comparing(jsonOne, jsonTwo));
+    List<String> newList = new ArrayList<>(StringConversionFiles.comparing(jsonOne, jsonTwo));
     Collections.sort(newList, (s1, s2) -> {
         String cleanOne = s1.replaceAll("^[^a-zA-Z]+", "");
         String cleanTwo = s2.replaceAll("^[^a-zA-Z]+", "");

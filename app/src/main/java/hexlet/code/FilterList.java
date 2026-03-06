@@ -7,9 +7,9 @@ import java.util.List;
 
 
 public class FilterList {
-public static String sorted(String jsonOne, String jsonTwo) throws IOException {
+    public static String sorted(String jsonOne, String jsonTwo, String style) throws IOException {
     String result = "";
-    List<String> newList = new ArrayList<>(StringConversionFiles.comparing(jsonOne, jsonTwo));
+    List<String> newList = new ArrayList<>(StringConversionFiles.comparing(jsonOne, jsonTwo, style));
     Collections.sort(newList, (s1, s2) -> {
         String cleanOne = s1.replaceAll("^[^a-zA-Z]+", "");
         String cleanTwo = s2.replaceAll("^[^a-zA-Z]+", "");
@@ -21,4 +21,7 @@ public static String sorted(String jsonOne, String jsonTwo) throws IOException {
     }
     return  result.replaceAll("\"", "").replaceAll("/abc1", "");
 }
+    public static String sorted(String jsonOne, String jsonTwo) throws IOException {
+        return sorted(jsonOne, jsonTwo, "stylish");
+    }
 }

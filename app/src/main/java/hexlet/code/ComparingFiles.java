@@ -6,16 +6,18 @@ import java.util.Map;
 
 public class ComparingFiles {
 
-    public static  boolean comparing(List<?> listOne, List<?> listTwo) {
-        return listOne.equals(listTwo);
+    public static boolean comparing(Object valueOne, Object valueTwo) {
+        if (valueOne instanceof List && valueTwo instanceof List) {
+            List<?> listOne = (List<?>) valueOne;
+            List<?> listTwo = (List<?>) valueTwo;
+            return listOne.equals(listTwo);
+        } else if (valueOne instanceof Map && valueTwo instanceof Map) {
+            Map<String, Object> mapOne = (Map<String, Object>) valueOne;
+            Map<String, Object> mapTwo = (Map<String, Object>) valueTwo;
+            return mapOne.equals(mapTwo);
+        } else {
+            return valueOne.equals(valueTwo);
+        }
     }
-
-    public  static  boolean comparing(Map<String, Object> mapOne, Map<String, Object> mapTwo) {
-        return mapOne.equals(mapTwo);
-    }
-
-    public  static  boolean comparing(Object objOne, Object objTwo) {
-        return objOne.equals(objTwo);
-    }
-    }
+}
 

@@ -23,7 +23,13 @@ public class App implements Runnable {
     @Override
     public final void run() {
         try {
-            System.out.println(FilterList.sorted(filePath1, filePath2));
+            if(stylish != null) {
+            if(stylish.equalsIgnoreCase("plain")){
+                System.out.println(FilterList.sorted(filePath1, filePath2, "plain"));
+            }
+            } else {
+                System.out.println(FilterList.sorted(filePath1, filePath2));
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

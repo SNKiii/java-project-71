@@ -5,7 +5,6 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
-import java.io.File;
 import java.io.IOException;
 
 @Command(name = "gendiff",
@@ -22,17 +21,7 @@ public class App implements Runnable {
     private String stylish;
     @Override
     public final void run() {
-        try {
-            if(stylish != null) {
-            if(stylish.equalsIgnoreCase("plain")){
-                System.out.println(FilterList.sorted(filePath1, filePath2, "plain"));
-            }
-            } else {
-                System.out.println(FilterList.sorted(filePath1, filePath2));
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            Formatter.selectFormat(filePath1, filePath2, stylish);
     }
 
     public static void main(String[] args) throws IOException {

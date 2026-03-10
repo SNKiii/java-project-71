@@ -1,5 +1,7 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import formatters.JsonFormat;
 import formatters.PlainConversionFiles;
 import formatters.StylishConversion;
 
@@ -32,6 +34,17 @@ public class StringConversionFiles {
                         comparList.add(PlainConversionFiles.plainFormater(checkTrue, key, value, mapJsonTwo.get(key)));
                         mapJsonTwo.remove(key);
                     }
+                } else if(style.equals("json")) {
+                    if(outcomes == 1) {
+                        comparList.add(JsonFormat.jsonFormater(key));
+                    } else {
+                        try {
+                            comparList.add(JsonFormat.jsonFormater(checkTrue, key, mapJsonTwo.get(key)));
+                        } catch (JsonProcessingException e) {
+                            throw new RuntimeException(e);
+                        }
+                        mapJsonTwo.remove(key);
+                    }
                 } else {
                     if (outcomes == 1) {
                         comparList.add(StylishConversion.defaultConvers(key, value));
@@ -50,6 +63,13 @@ public class StringConversionFiles {
                 switch (style) {
                     case "plain":
                         comparList.add(PlainConversionFiles.plainFormater(key, value));
+                        break;
+                    case  "json":
+                        try {
+                            comparList.add(JsonFormat.jsonFormater(key, value));
+                        } catch (JsonProcessingException e) {
+                            throw new RuntimeException(e);
+                        }
                         break;
                     default:
                         int stub = 0;

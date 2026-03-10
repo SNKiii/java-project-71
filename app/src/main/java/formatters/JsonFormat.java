@@ -8,7 +8,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class JsonFormat {
-    public static String jsonFormater(boolean check, String key, Object valueTwo) throws JsonProcessingException {
+    public static String jsonFormater(boolean check, String key, Object valueTwo, Object valueOne) throws JsonProcessingException {
+        if(valueTwo == null && valueOne == null) {
+            return "";
+        }
         String startValue = "";
         String endValue = "";
         ObjectMapper mapper = new ObjectMapper();

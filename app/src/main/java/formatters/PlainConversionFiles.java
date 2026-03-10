@@ -24,7 +24,11 @@ public class PlainConversionFiles {
                 if (valueOne instanceof Integer || valueOne instanceof Boolean && valueTwo instanceof Integer || valueTwo instanceof Boolean){
                     return  "Property '" + key + "' was updated. From " + valueOne + " to " + valueTwo;
                 } else {
-                    return  "Property '" + key + "' was updated. From '" + valueOne + "' to '" + valueTwo + "'";
+                    if(valueOne == null && valueTwo == null) {
+                        return "";
+                    } else {
+                        return "Property '" + key + "' was updated. From '" + valueOne + "' to '" + valueTwo + "'";
+                    }
                 }
         }
         return "";
@@ -32,7 +36,7 @@ public class PlainConversionFiles {
 
 
     public static  String plainFormater(String key) {
-        return "Property '" + key + "' was removed";
+            return "Property '" + key + "' was removed";
     }
 
     public static <T> String plainFormater(String key, T value) {

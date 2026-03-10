@@ -39,7 +39,7 @@ public class StringConversionFiles {
                         comparList.add(JsonFormat.jsonFormater(key));
                     } else {
                         try {
-                            comparList.add(JsonFormat.jsonFormater(checkTrue, key, mapJsonTwo.get(key)));
+                            comparList.add(JsonFormat.jsonFormater(checkTrue, key, mapJsonTwo.get(key), value));
                         } catch (JsonProcessingException e) {
                             throw new RuntimeException(e);
                         }

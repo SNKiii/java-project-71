@@ -8,27 +8,28 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class JsonFormat {
-    public static String jsonFormater(boolean check, String key, Object valueTwo, Object valueOne) throws JsonProcessingException {
-        if(valueTwo == null && valueOne == null) {
+    public static String jsonFormater(boolean check, String key, Object valueTwo, Object valueOne)
+            throws JsonProcessingException {
+        if (valueTwo == null && valueOne == null) {
             return "";
         }
         String startValue = "";
         String endValue = "";
         ObjectMapper mapper = new ObjectMapper();
-        if(!(valueTwo instanceof Boolean) && !(valueTwo instanceof Integer)) {
+        if (!(valueTwo instanceof Boolean) && !(valueTwo instanceof Integer)) {
             startValue = "\"";
             endValue = "\"";
         }
-        if(!check) {
+        if (!check) {
             String result = "   \"operation\": \"replace\",\n" + "   \"name\": \"" + key + "\",\n   \"value\": ";
-                if(valueTwo instanceof List) {
+                if (valueTwo instanceof List) {
                     List<?> list = (List<?>) valueTwo;
                     String listNew = list.stream()
                             .map(item -> "\"" + item.toString() + "\"")
                             .collect(Collectors.joining(", ", "[", "]"));
                     return result + listNew;
                 }
-                if(valueTwo instanceof  Map) {
+                if (valueTwo instanceof  Map) {
                     String mapJson = mapper.writeValueAsString(valueTwo);
                     return result + mapJson;
                 } else {
@@ -47,17 +48,17 @@ public class JsonFormat {
         String startValue = "";
         String endValue = "";
         ObjectMapper mapper = new ObjectMapper();
-        if(!(valueTwo instanceof Boolean) && !(valueTwo instanceof Integer)) {
+        if (!(valueTwo instanceof Boolean) && !(valueTwo instanceof Integer)) {
             startValue = "\"";
             endValue = "\"";
         }
-        if(valueTwo instanceof List) {
+        if (valueTwo instanceof List) {
             List<?> list = (List<?>) valueTwo;
             String listNew = list.stream()
                     .map(item -> "\"" + item.toString() + "\"")
                     .collect(Collectors.joining(", ", "[", "]"));
             return result + listNew;
-        } else if(valueTwo instanceof  Map) {
+        } else if (valueTwo instanceof  Map) {
             String mapJson = mapper.writeValueAsString(valueTwo);
             return result + mapJson;
         } else {

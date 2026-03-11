@@ -42,7 +42,8 @@ import java.util.Map;
          }
          try {
              File newFile = new File(file);
-             Map<String, Object> stringObjectMap = yamlMapper.readValue(newFile, new TypeReference<Map<String, Object>>() {
+             Map<String, Object> stringObjectMap = yamlMapper.readValue(newFile,
+                     new TypeReference<Map<String, Object>>() {
              });
              return stringObjectMap;
          } catch (IOException e) {

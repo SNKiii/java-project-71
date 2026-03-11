@@ -1,4 +1,5 @@
-package TestStandartConversion;
+package test.standart.conversion;
+
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,7 +11,9 @@ public class TestOne {
 
     @Test
     void indenticalTest() throws IOException {
-        String indenticalJsonFile = "C:\\Users\\slei_ghoul228\\IdeaProjects\\java-project-712\\app\\src\\test\\resources"
+        String indenticalJsonFile = "C:\\Users\\slei_ghoul228\\IdeaProjects\\java-project-712"
+                +
+                "\\app\\src\\test\\resources"
                 + "\\jsonTestFiles\\IndenticalFile.json";
             String trueString = """
                     follow: false
@@ -18,13 +21,17 @@ public class TestOne {
                     proxy: 123.234.53.22
                     timeout: 50
                   """;
-        assertEquals(trueString, FilterList.sorted(indenticalJsonFile, indenticalJsonFile,"standart"));
+        assertEquals(trueString, FilterList.sorted(indenticalJsonFile, indenticalJsonFile, "standart"));
     }
 
     @Test
     void nullValuesTest() throws IOException {
-        String jsonTwoFile = "C:\\Users\\slei_ghoul228\\IdeaProjects\\java-project-712\\app\\src\\test\\resources\\jsonTestFiles\\falseJsonFile.json";
-        String jsonOneFile = "C:\\Users\\slei_ghoul228\\IdeaProjects\\java-project-712\\app\\src\\test\\resources\\jsonTestFiles\\trueJsonFile.json";
+        String jsonTwoFile = "C:\\Users\\slei_ghoul228\\IdeaProjects\\java-project-712\\app\\src"
+                +
+                "\\test\\resources\\jsonTestFiles\\falseJsonFile.json";
+        String jsonOneFile = "C:\\Users\\slei_ghoul228\\IdeaProjects\\java-project-712\\app\\src"
+                +
+                "\\test\\resources\\jsonTestFiles\\trueJsonFile.json";
         String trueString = """
                   keyOne: 12
                 - keyThree: \n+ keyThree: 13
@@ -35,9 +42,13 @@ public class TestOne {
 
     @Test
     void correctWorkTest() throws IOException {
-        String jsonOneFile = "C:\\Users\\slei_ghoul228\\IdeaProjects\\java-project-712\\app\\src\\test\\resources"
+        String jsonOneFile = "C:\\Users\\slei_ghoul228\\IdeaProjects\\java-project-712\\app\\src"
+                +
+                "\\test\\resources"
                 + "\\jsonTestFiles\\testCorrectWork\\fileOne.json";
-        String jsonTwoFile = "C:\\Users\\slei_ghoul228\\IdeaProjects\\java-project-712\\app\\src\\test\\resources"
+        String jsonTwoFile = "C:\\Users\\slei_ghoul228\\IdeaProjects\\java-project-712"
+                +
+                "\\app\\src\\test\\resources"
                 + "\\jsonTestFiles\\testCorrectWork\\fileTwo.json";
         String trueString = """
           chars1: [a, b, c]

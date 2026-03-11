@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class Formatter {
     public static void selectFormat(String fileOne, String fileTwo, String format) {
-        if(format == null) {
+        if (format == null) {
             format = "standart";
         }
             switch (format) {

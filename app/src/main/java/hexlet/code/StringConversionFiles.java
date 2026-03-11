@@ -34,8 +34,8 @@ public class StringConversionFiles {
                         comparList.add(PlainConversionFiles.plainFormater(checkTrue, key, value, mapJsonTwo.get(key)));
                         mapJsonTwo.remove(key);
                     }
-                } else if(style.equals("json")) {
-                    if(outcomes == 1) {
+                } else if (style.equals("json")) {
+                    if (outcomes == 1) {
                         comparList.add(JsonFormat.jsonFormater(key));
                     } else {
                         try {
@@ -49,7 +49,8 @@ public class StringConversionFiles {
                     if (outcomes == 1) {
                         comparList.add(StylishConversion.defaultConvers(key, value));
                     } else {
-                        String stConString = StylishConversion.defaultConvers(checkTrue, key, value, mapJsonTwo.get(key));
+                        String stConString = StylishConversion.defaultConvers(checkTrue, key,
+                                value, mapJsonTwo.get(key));
                         String[] twoString = stConString.split(" @#R!Z ");
                         mapJsonTwo.remove(key);
                         for (String i : twoString) {

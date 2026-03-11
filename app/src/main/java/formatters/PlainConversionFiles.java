@@ -21,10 +21,12 @@ public class PlainConversionFiles {
                     }
                     return "Property '" + key + "' was updated. From '" + valueOne + "' to [complex value]";
                 }
-                if (valueOne instanceof Integer || valueOne instanceof Boolean && valueTwo instanceof Integer || valueTwo instanceof Boolean){
+                if (valueOne instanceof Integer || valueOne instanceof Boolean
+                        &&
+                        valueTwo instanceof Integer || valueTwo instanceof Boolean) {
                     return  "Property '" + key + "' was updated. From " + valueOne + " to " + valueTwo;
                 } else {
-                    if(valueOne == null && valueTwo == null) {
+                    if (valueOne == null && valueTwo == null) {
                         return "";
                     } else {
                         return "Property '" + key + "' was updated. From '" + valueOne + "' to '" + valueTwo + "'";
@@ -44,7 +46,7 @@ public class PlainConversionFiles {
             if (value instanceof List || value instanceof  Map) {
                 return "Property '" + key + "' was added with value: [complex value]";
             } else {
-                if (value instanceof Integer || value instanceof Boolean){
+                if (value instanceof Integer || value instanceof Boolean) {
                     return "Property '" + key + "' was added with value: " + value;
             } else {
                     return "Property '" + key + "' was added with value: '" + value + "'";

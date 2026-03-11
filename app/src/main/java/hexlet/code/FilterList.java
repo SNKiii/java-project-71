@@ -30,12 +30,12 @@ public class FilterList {
             return cleanOne.compareToIgnoreCase(cleanTwo);
         });
         for (int i = 0; i < newList.size(); i++) {
-            if(i != newList.size() - 1) {
+            if (i != newList.size() - 1) {
                 result += "  {\n" + newList.get(i) + "\n  },\n";
             } else {
                 result += "  {\n" + newList.get(i) + "\n  }\n";
             }
         }
-        return "{\n \"All replace\": [\n" + result + " ]\n}" ;
+        return "{\n \"All replace\": [\n" + result + " ]\n}";
     }
 }

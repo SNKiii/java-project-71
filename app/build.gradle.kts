@@ -5,7 +5,7 @@ plugins {
     id("org.sonarqube") version "7.1.0.6387"
 }
 
-group = "org.example"
+group = "hexlet.code"
 version = "1.0-SNAPSHOT"
 
 application{

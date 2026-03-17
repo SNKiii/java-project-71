@@ -15,6 +15,8 @@ public class ComparingFiles {
             Map<String, Object> mapOne = (Map<String, Object>) valueOne;
             Map<String, Object> mapTwo = (Map<String, Object>) valueTwo;
             return mapOne.equals(mapTwo);
+        } else if (valueOne instanceof List || valueOne instanceof Map || valueTwo instanceof List || valueTwo instanceof Map) {
+            return  false;
         } else {
             return valueOne.equals(valueTwo);
         }

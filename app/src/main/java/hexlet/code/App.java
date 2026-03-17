@@ -21,9 +21,20 @@ public class App implements Runnable {
     private String stylish;
     @Override
     public final void run() {
-            Formatter.selectFormat(filePath1, filePath2, stylish);
+        if(stylish == null || stylish.isEmpty()) {
+            try {
+                System.out.println(Differ.generate(filePath1, filePath2));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            try {
+                System.out.println(Differ.generate(filePath1, filePath2, stylish));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
-
     public static void main(String[] args) throws IOException {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);

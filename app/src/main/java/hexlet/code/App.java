@@ -21,7 +21,7 @@ public class App implements Runnable {
     private String stylish;
     @Override
     public final void run() {
-        if(stylish == null || stylish.isEmpty()) {
+        if (stylish == null || stylish.isEmpty()) {
             try {
                 System.out.println(Differ.generate(filePath1, filePath2));
             } catch (Exception e) {

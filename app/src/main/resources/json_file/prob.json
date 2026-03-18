@@ -27,23 +27,13 @@
     },
     {
       "operation": "replace",
-      "name": "chars2",
-      "value": false
-    },
-    {
-      "operation": "replace",
-      "name": "checked",
-      "value": true
-    },
-    {
-      "operation": "replace",
       "name": "default",
       "value": ["value1", "value2"]
     },
     {
       "operation": "replace",
       "name": "id",
-      "value": "null"
+      "value": null
     },
     {
       "operation": "replace",
@@ -64,6 +54,5 @@
       "operation": "replace",
       "name": "setting3",
       "value": "none"
-    }
-  ]
+    }]
 }

@@ -21,7 +21,9 @@ public class JsonFormat {
         map.forEach((key, value) -> {
             String[] arrKey = key.split(" #RAZDEL# ");
             if (arrKey[0].equals("remote")) {
-                listRemove.add("   \"operation\": \"remove\",\n" + "   \"name\": \"" + arrKey[1] + "\",\n   \"value\": " + null);
+                listRemove.add("   \"operation\": \"remove\",\n" + "   \"name\": \"" + arrKey[1]
+                        +
+                        "\",\n   \"value\": " + null);
             } else if (arrKey[0].equals("add")) {
                 String result = "   \"operation\": \"add\",\n" + "   \"name\": \"" + arrKey[1] + "\",\n   \"value\": ";
                 String startString = "";
@@ -51,7 +53,9 @@ public class JsonFormat {
             } else if (arrKey[0].equals("unfaithful two")) {
                 String startString = "\"";
                 String endString = "\"";
-                String result = "   \"operation\": \"replace\",\n" + "   \"name\": \"" + arrKey[1] + "\",\n   \"value\": ";
+                String result = "   \"operation\": \"replace\",\n" + "   \"name\": \""
+                        +
+                        arrKey[1] + "\",\n   \"value\": ";
                 ObjectMapper mapper = new ObjectMapper();
                 if ((value instanceof Boolean || value instanceof Integer) || value.equals("null")) {
                     startString = "";
@@ -73,7 +77,7 @@ public class JsonFormat {
                     }
                 } else {
 
-                    if(!valueOneObject.isEmpty() && key != valueOneObject.get(0)) {
+                    if (!valueOneObject.isEmpty() && key != valueOneObject.get(0)) {
                         listReplace.add(result + startString + value + endString);
                     }
                 }
@@ -81,7 +85,7 @@ public class JsonFormat {
         });
 
         for (int i = 0; i < listAdd.size(); i++) {
-            if ( i != 0) {
+            if (i != 0) {
                 startValue += ",\n";
             }
             startValue += "  {\n" + listAdd.get(i) + "\n  }";

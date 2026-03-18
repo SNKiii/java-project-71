@@ -1,6 +1,8 @@
 package hexlet.code;
 
-import java.util.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Differ {
 
@@ -18,7 +20,7 @@ public class Differ {
                 return null;
             }
             String contentTwo = java.nio.file.Files.readString(java.nio.file.Paths.get(filePath2));
-            if (filePath1.endsWith(".json")) {
+            if (filePath2.endsWith(".json")) {
             formatTwo = "json";
             } else if (filePath2.endsWith(".yaml") || filePath2.endsWith(".yml")) {
             formatTwo = "yaml";
@@ -33,7 +35,7 @@ public class Differ {
                 resultMap.put("remote #RAZDEL# " + key, value);
             } else if (key != null) {
                 if (mapJsonTwo.get(key) != null && value != null) {
-                    if (ComparingFiles.comparing(value, mapJsonTwo.get(key))) {
+                    if (Comparing.comparing(value, mapJsonTwo.get(key))) {
                         resultMap.put("inchanges #RAZDEL# " + key, value);
                         mapJsonTwo.remove(key);
                     } else {
@@ -43,7 +45,7 @@ public class Differ {
                     }
                 } else if (value != null && mapJsonTwo.get(key) == null) {
                     Object valueTwo = "null";
-                    if (ComparingFiles.comparing(value, valueTwo)) {
+                    if (Comparing.comparing(value, valueTwo)) {
                         resultMap.put("inchanges #RAZDEL# " + key, value);
                         mapJsonTwo.remove(key);
                     } else {
@@ -51,9 +53,9 @@ public class Differ {
                         resultMap.put("unfaithful two #RAZDEL# " + key, valueTwo);
                         mapJsonTwo.remove(key);
                     }
-                } else if (value == null && mapJsonTwo.get(key) != null){
+                } else if (value == null && mapJsonTwo.get(key) != null) {
                     Object valueOne = "null";
-                    if (ComparingFiles.comparing(valueOne, mapJsonTwo.get(key))) {
+                    if (Comparing.comparing(valueOne, mapJsonTwo.get(key))) {
                         resultMap.put("inchanges #RAZDEL# " + key, valueOne);
                         mapJsonTwo.remove(key);
                     } else {
@@ -66,12 +68,12 @@ public class Differ {
             });
 
         mapJsonTwo.forEach((key, value) -> {
-            if(key != null && value != null) {
+            if (key != null && value != null) {
                 resultMap.put("add #RAZDEL# " + key, value);
             }
         });
 
-        if(resultMap.isEmpty()) {
+        if (resultMap.isEmpty()) {
             return "";
         }
 

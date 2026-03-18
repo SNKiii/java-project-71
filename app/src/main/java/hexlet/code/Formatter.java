@@ -2,7 +2,7 @@ package hexlet.code;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import hexlet.code.formatters.JsonFormat;
-import hexlet.code.formatters.PlainConversionFiles;
+import hexlet.code.formatters.PlainConversion;
 import hexlet.code.formatters.StylishConversion;
 
 import java.util.Map;
@@ -15,7 +15,7 @@ public class Formatter {
                 return StylishConversion.defaultConvers(map);
             } else if (map.get("style").equals("plain")) {
                 map.remove("style");
-                return PlainConversionFiles.plainFormater(map);
+                return PlainConversion.plainFormater(map);
             } else if (map.get("style").equals("json")) {
                 map.remove("style");
                 try {

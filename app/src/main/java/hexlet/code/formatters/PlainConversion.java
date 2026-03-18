@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class PlainConversionFiles {
+public class PlainConversion {
     public static String plainFormater(Map<String, Object> map) {
         String plainFormat = "";
         List<String> list = new ArrayList<>();
@@ -39,15 +39,21 @@ public class PlainConversionFiles {
                             valueOneObject.removeFirst();
                             return;
                         }
-                        list.add("Property '" + arrKey[1] + "' was updated. From [complex value] to '" + valueTwo + "'");
+                        list.add("Property '" + arrKey[1]
+                                +
+                                "' was updated. From [complex value] to '" + valueTwo + "'");
                         valueOneObject.removeFirst();
                     }
                 } else if (valueTwo instanceof Map || valueTwo instanceof List) {
                     if (valueOne instanceof Integer || valueOne instanceof Boolean || valueOne.equals("null")) {
-                        list.add("Property '" + arrKey[1] + "' was updated. From " + valueOne + " to [complex value]");
+                        list.add("Property '" + arrKey[1]
+                                +
+                                "' was updated. From " + valueOne + " to [complex value]");
                         valueOneObject.removeFirst();
                     } else {
-                        list.add("Property '" + arrKey[1] + "' was updated. From '" + valueOne + "' to [complex value]");
+                        list.add("Property '" + arrKey[1] + "' was updated. From '"
+                                +
+                                valueOne + "' to [complex value]");
                         valueOneObject.removeFirst();
                     }
                 } else if (valueOne instanceof Boolean || valueOne instanceof Integer || valueOne.equals("null")) {
@@ -55,14 +61,18 @@ public class PlainConversionFiles {
                         list.add("Property '" + arrKey[1] + "' was updated. From " + valueOne + " to " + valueTwo);
                         valueOneObject.removeFirst();
                     } else {
-                        list.add("Property '" + arrKey[1] + "' was updated. From " + valueOne + " to '" + valueTwo + "'");
+                        list.add("Property '" + arrKey[1] + "' was updated. From "
+                                +
+                                valueOne + " to '" + valueTwo + "'");
                         valueOneObject.removeFirst();
                     }
                 } else if (valueTwo instanceof Boolean || valueTwo instanceof  Integer || valueTwo.equals("null")) {
                     list.add("Property '" + arrKey[1] + "' was updated. From '" + valueOne + "' to " + valueTwo);
                     valueOneObject.removeFirst();
-                }else {
-                    list.add("Property '" + arrKey[1] + "' was updated. From '" + valueOne + "' to '" + valueTwo + "'");
+                } else {
+                    list.add("Property '" + arrKey[1] + "' was updated. From '"
+                            +
+                            valueOne + "' to '" + valueTwo + "'");
                     valueOneObject.removeFirst();
                 }
 

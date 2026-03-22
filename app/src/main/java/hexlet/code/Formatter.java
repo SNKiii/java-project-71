@@ -5,26 +5,19 @@ import hexlet.code.formatters.JsonFormat;
 import hexlet.code.formatters.PlainConversion;
 import hexlet.code.formatters.StylishConversion;
 
+import java.util.List;
 import java.util.Map;
 
 public class Formatter {
-    public static String selectFormat(Map<String, Object> map) {
-        if (map.containsKey("style")) {
-            if (map.get("style").equals("standart")) {
-                map.remove("style");
-                return StylishConversion.defaultConvers(map);
-            } else if (map.get("style").equals("plain")) {
-                map.remove("style");
-                return PlainConversion.plainFormater(map);
-            } else if (map.get("style").equals("json")) {
-                map.remove("style");
-                try {
-                    return JsonFormat.jsonFormater(map);
-                } catch (JsonProcessingException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+    public static String selectFormat(Map<String, List<Status>> map) throws JsonProcessingException {
+        if (map.containsKey("standart")) {
+            return StylishConversion.defaultConvers(map.get("standart"));
+        } else if (map.containsKey("plain")) {
+            return PlainConversion.plainFormater(map.get("plain"));
+        } else if (map.containsKey("json")) {
+            return JsonFormat.jsonFormater(map.get("json"));
         }
+        System.out.println("dddd");
         return "";
     }
 }

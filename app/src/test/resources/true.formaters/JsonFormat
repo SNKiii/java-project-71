@@ -1,0 +1,1 @@
+{"deleted obj1":{"nestedKey":"value","isNested":true},"added yach":["one","two"],"changed keyOne":"old: 12 new: [1, 3, 5]","changed keyThree":"old: 13 new: null","unchanged keyTwo":"value"}

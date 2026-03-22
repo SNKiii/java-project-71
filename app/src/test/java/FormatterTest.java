@@ -1,6 +1,10 @@
 import hexlet.code.Differ;
 import org.junit.jupiter.api.Test;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FormatterTest {
@@ -8,14 +12,15 @@ public class FormatterTest {
     void testStylishConversion() {
         String pathOne = "src/test/resources/JsonOne.json";
         String pathTwo = "src/test/resources/JsonTwo.json";
-        String trueResult = """
-                  keyOne: 12
-                - keyThree: 13
-                + keyThree: [a, b]
-                  keyTwo: value
-                """;
+        String pathOneYML = "src/test/resources/YamlOne.yaml";
+        String pathTwoYML = "src/test/resources/YamlTwo.yaml";
+        String patchResult = "src/test/resources/true.formaters/StandartFormat";
         try {
-            assertEquals(trueResult, Differ.generate(pathOne, pathTwo));
+            String trueResult = Files.readString(Paths.get(patchResult), StandardCharsets.UTF_8);
+            assertEquals(trueResult.stripTrailing().replace("\r\n", "\n"),
+                    Differ.generate(pathOne, pathTwo, "standart"));
+            assertEquals(trueResult.stripTrailing().replace("\r\n", "\n"),
+                    Differ.generate(pathOneYML, pathTwoYML, "standart"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -25,15 +30,15 @@ public class FormatterTest {
     void testPlainConversion() {
         String pathOne = "src/test/resources/OneJson.json";
         String pathTwo = "src/test/resources/TwoJson.json";
-        String trueResult = """
-                Property 'keyOne' was updated. From '12' to [complex value]
-                Property 'keyThree' was updated. From '13' to null
-                Property 'obj1' was removed
-                Property 'yach' was added with value: [complex value]
-                """;
-
+        String patchResult = "src/test/resources/true.formaters/PlainFormat";
+        String pathOneYML = "src/test/resources/OneYaml.yaml";
+        String pathTwoYML = "src/test/resources/TwoYaml.yaml";
         try {
-            assertEquals(trueResult, Differ.generate(pathOne, pathTwo, "plain"));
+            String trueResult = Files.readString(Paths.get(patchResult), StandardCharsets.UTF_8);
+            assertEquals(trueResult.stripTrailing().replace("\r\n", "\n"),
+                    Differ.generate(pathOne, pathTwo, "plain"));
+            assertEquals(trueResult.stripTrailing().replace("\r\n", "\n"),
+                    Differ.generate(pathOneYML, pathTwoYML, "plain"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -43,36 +48,33 @@ public class FormatterTest {
     void testJsonFormater() {
         String pathOne = "src/test/resources/OneJson.json";
         String pathTwo = "src/test/resources/TwoJson.json";
-        String trueResult = """
-                {
-                 "All replace": [
-                  {
-                   "operation": "add",
-                   "name": "yach",
-                   "value": ["one", "two"]
-                  },
-                  {
-                   "operation": "remove",
-                   "name": "obj1",
-                   "value": null
-                  },
-                  {
-                   "operation": "replace",
-                   "name": "keyOne",
-                   "value": ["1", "3", "5"]
-                  },
-                  {
-                   "operation": "replace",
-                   "name": "keyThree",
-                   "value": null
-                  }
-                 ]
-                }
-                 """;
+        String patchResult = "src/test/resources/true.formaters/JsonFormat";
+        String pathOneYML = "src/test/resources/OneYaml.yaml";
+        String pathTwoYML = "src/test/resources/TwoYaml.yaml";
         try {
-            assertEquals(trueResult.stripTrailing().replace("\r\n", "\n")
-                    .trim(),
-                    Differ.generate(pathOne, pathTwo, "json").replace("\r\n", "\n"));
+            String trueResult = Files.readString(Paths.get(patchResult), StandardCharsets.UTF_8);
+            assertEquals(trueResult.stripTrailing().replace("\r\n", "\n"),
+                    Differ.generate(pathOne, pathTwo, "json"));
+            assertEquals(trueResult.stripTrailing().replace("\r\n", "\n"),
+                    Differ.generate(pathOneYML, pathTwoYML, "json"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    void  testDefoultFormater() {
+        String pathOne = "src/test/resources/JsonOne.json";
+        String pathTwo = "src/test/resources/JsonTwo.json";
+        String pathOneYML = "src/test/resources/YamlOne.yaml";
+        String pathTwoYML = "src/test/resources/YamlTwo.yaml";
+        String patchResult = "src/test/resources/true.formaters/StandartFormat";
+        try {
+            String trueResult = Files.readString(Paths.get(patchResult), StandardCharsets.UTF_8);
+            assertEquals(trueResult.stripTrailing().replace("\r\n", "\n"),
+                    Differ.generate(pathOne, pathTwo, ""));
+            assertEquals(trueResult.stripTrailing().replace("\r\n", "\n"),
+                    Differ.generate(pathOneYML, pathTwoYML, ""));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

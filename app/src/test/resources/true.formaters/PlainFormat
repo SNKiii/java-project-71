@@ -1,0 +1,4 @@
+Property 'keyOne' was updated. From '12' to [complex value]
+Property 'keyThree' was updated. From '13' to null
+Property 'obj1' was removed
+Property 'yach' was added with value: [complex value]

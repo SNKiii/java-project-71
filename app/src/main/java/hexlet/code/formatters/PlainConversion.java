@@ -1,89 +1,120 @@
 package hexlet.code.formatters;
 
-import java.util.ArrayList;
+import hexlet.code.Status;
+
 import java.util.List;
 import java.util.Map;
 
 
 public class PlainConversion {
-    public static String plainFormater(Map<String, Object> map) {
+    public static String plainFormater(List<Status> list) {
         String plainFormat = "";
-        List<String> list = new ArrayList<>();
-        List<Object> valueOneObject = new ArrayList<>();
-        map.forEach((key, value) -> {
-            String[] arrKey = key.split(" #RAZDEL# ");
-            if (arrKey[0].equals("remote")) {
-                list.add("Property '" + arrKey[1] + "' was removed");
-            } else if (arrKey[0].equals("add") && arrKey[1] != null && value != null) {
-                if (value instanceof List || value instanceof Map) {
-                    list.add("Property '" + arrKey[1] + "' was added with value: [complex value]");
-                } else {
-                    if (value instanceof Integer || value instanceof Boolean) {
-                        list.add("Property '" + arrKey[1] + "' was added with value: " + value);
-                    } else {
-                        list.add("Property '" + arrKey[1] + "' was added with value: '" + value + "'");
-                    }
-                }
-            } else if (arrKey[0].equals("unfaithful one")) {
-                valueOneObject.add(value);
-            } else if (arrKey[0].equals("unfaithful two")) {
-                Object valueTwo = value;
-                Object valueOne = valueOneObject.getFirst();
-                if (valueOne instanceof Map || valueOne instanceof List) {
-                    if (valueTwo instanceof Map || valueTwo instanceof List) {
-                        list.add("Property '" + arrKey[1] + "' was updated. From [complex value] to [complex value]");
-                        valueOneObject.removeFirst();
-                    } else {
-                        if (valueTwo instanceof Integer || valueTwo instanceof Boolean || valueTwo.equals("null")) {
-                            list.add("Property '" + arrKey[1] + "' was updated. From [complex value] to " + valueTwo);
-                            valueOneObject.removeFirst();
-                            return;
-                        }
-                        list.add("Property '" + arrKey[1]
-                                +
-                                "' was updated. From [complex value] to '" + valueTwo + "'");
-                        valueOneObject.removeFirst();
-                    }
-                } else if (valueTwo instanceof Map || valueTwo instanceof List) {
-                    if (valueOne instanceof Integer || valueOne instanceof Boolean || valueOne.equals("null")) {
-                        list.add("Property '" + arrKey[1]
-                                +
-                                "' was updated. From " + valueOne + " to [complex value]");
-                        valueOneObject.removeFirst();
-                    } else {
-                        list.add("Property '" + arrKey[1] + "' was updated. From '"
-                                +
-                                valueOne + "' to [complex value]");
-                        valueOneObject.removeFirst();
-                    }
-                } else if (valueOne instanceof Boolean || valueOne instanceof Integer || valueOne.equals("null")) {
-                    if (valueTwo instanceof Boolean || valueTwo instanceof  Integer || valueTwo.equals("null")) {
-                        list.add("Property '" + arrKey[1] + "' was updated. From " + valueOne + " to " + valueTwo);
-                        valueOneObject.removeFirst();
-                    } else {
-                        list.add("Property '" + arrKey[1] + "' was updated. From "
-                                +
-                                valueOne + " to '" + valueTwo + "'");
-                        valueOneObject.removeFirst();
-                    }
-                } else if (valueTwo instanceof Boolean || valueTwo instanceof  Integer || valueTwo.equals("null")) {
-                    list.add("Property '" + arrKey[1] + "' was updated. From '" + valueOne + "' to " + valueTwo);
-                    valueOneObject.removeFirst();
-                } else {
-                    list.add("Property '" + arrKey[1] + "' was updated. From '"
+
+        for (var obj : list) {
+            if (obj.getStatusName().equals(Status.DELETED)) {
+                plainFormat = plainFormat + "Property '" + obj.getKey() + "' was removed\n";
+            } else if (obj.getStatusName().equals(Status.ADDED)) {
+                if (obj.getOldValue() instanceof List
+                        ||
+                        obj.getOldValue() instanceof Map) {
+                    plainFormat = plainFormat + "Property '" + obj.getKey()
                             +
-                            valueOne + "' to '" + valueTwo + "'");
-                    valueOneObject.removeFirst();
+                            "' was added with value: [complex value]\n";
+                } else {
+                    if (obj.getOldValue() instanceof Integer
+                            ||
+                            obj.getOldValue() instanceof Boolean) {
+                        plainFormat = plainFormat + "Property '" + obj.getKey() + "' was added with value: "
+                                +
+                                obj.getOldValue() + "\n";
+                    } else {
+                        plainFormat = plainFormat + "Property '" + obj.getKey() + "' was added with value: '"
+                                +
+                                obj.getOldValue() + "'\n";
+                    }
                 }
-
+            } else if (obj.getStatusName().equals(Status.CHANGED)) {
+                if (obj.getNewValue() instanceof List
+                        ||
+                        obj.getNewValue() instanceof Map) {
+                    if (obj.getOldValue() instanceof List
+                            ||
+                            obj.getOldValue() instanceof Map) {
+                        plainFormat = plainFormat + "Property '" + obj.getKey()
+                                +
+                                "' was updated. From [complex value] to [complex value]\n";
+                    } else if (obj.getOldValue() instanceof Boolean
+                            ||
+                            obj.getOldValue() instanceof Integer
+                            ||
+                            obj.getOldValue().equals("null")) {
+                        plainFormat = plainFormat + "Property '" + obj.getKey()
+                                +
+                                "' was updated. From " + obj.getOldValue() + " to [complex value]\n";
+                    } else {
+                        plainFormat = plainFormat + "Property '"
+                                +
+                                obj.getKey() + "' was updated. From '" + obj.getOldValue() + "' to [complex value]\n";
+                    }
+                } else if (obj.getOldValue() instanceof List
+                        ||
+                        obj.getOldValue() instanceof Map) {
+                    if (obj.getNewValue() instanceof Boolean
+                            ||
+                            obj.getNewValue() instanceof Map
+                            ||
+                            obj.getNewValue().equals("null")) {
+                        plainFormat = plainFormat + "Property '"
+                                +
+                                obj.getKey() + "' was updated. From [complex value] to " + obj.getNewValue() + "\n";
+                    } else {
+                        plainFormat = plainFormat + "Property '"
+                                +
+                                obj.getKey() + "' was updated. From [complex value] to '" + obj.getNewValue() + "'\n";
+                    }
+                } else {
+                    if (obj.getNewValue() instanceof Boolean
+                            ||
+                            obj.getNewValue() instanceof Integer
+                            ||
+                            obj.getNewValue().equals("null")) {
+                        if (obj.getOldValue() instanceof Boolean
+                                ||
+                                obj.getOldValue() instanceof Integer
+                                ||
+                                obj.getOldValue().equals("null")) {
+                            plainFormat = plainFormat + "Property '"
+                                    +
+                                    obj.getKey() + "' was updated. From " + obj.getOldValue() + " to "
+                                    +
+                                    obj.getNewValue() + "\n";
+                        } else {
+                            plainFormat = plainFormat + "Property '"
+                                    +
+                                    obj.getKey() + "' was updated. From '"
+                                    +
+                                    obj.getOldValue() + "' to " + obj.getNewValue() + "\n";
+                        }
+                    } else if (obj.getOldValue() instanceof Boolean
+                            ||
+                            obj.getOldValue() instanceof Integer
+                            ||
+                            obj.getOldValue().equals("null")) {
+                        plainFormat = plainFormat + "Property '" + obj.getKey()
+                                +
+                                "' was updated. From " + obj.getOldValue() + " to '" + obj.getNewValue() + "'\n";
+                    } else {
+                        plainFormat = plainFormat + "Property '"
+                                +
+                                obj.getKey() + "' was updated. From '" + obj.getOldValue()
+                                +
+                                "' to '" + obj.getNewValue() + "'\n";
+                    }
+                }
             }
-        });
-
-        for (String text : list) {
-            plainFormat += text + "\n";
         }
-
-        return plainFormat;
+        return plainFormat.stripTrailing();
     }
 }
+
 

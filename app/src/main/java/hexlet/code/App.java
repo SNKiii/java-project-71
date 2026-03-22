@@ -6,35 +6,54 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 import java.io.IOException;
+import java.util.concurrent.Callable;
 
 @Command(name = "gendiff",
         description = "Compares two configuration files and shows a difference.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class)
 
-public class App implements Runnable {
+public final class App implements Runnable, Callable<Integer> {
+
+    private static final int SUCCESS_EXIT_CODE = 0;
+    private static final int ERROR_EXIT_CODE = 1;
+
+    @Override
+    public Integer call() {
+        try {
+            String formattedDiff = Differ.generate(filePath1, filePath2, stylish);
+            System.out.println(formattedDiff);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return ERROR_EXIT_CODE;
+        }
+
+        return SUCCESS_EXIT_CODE;
+    }
+
     @Parameters(index = "0", paramLabel =  "filepath1", description = "path to first file")
     private String filePath1;
     @Parameters(index = "1", paramLabel =  "filepath2", description = "path to second file")
     private String filePath2;
-    @Option(names = {"-f", "--format"}, paramLabel = "format", description = "output format [default: stylish]")
+    @Option(
+            names = {"-f", "--format"},
+            paramLabel = "format",
+            description = "output format [default: stylish]",
+            defaultValue = "standart"
+    )
     private String stylish;
     @Override
-    public final void run() {
-        if (stylish == null || stylish.isEmpty()) {
-            try {
-                System.out.println(Differ.generate(filePath1, filePath2));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            try {
-                System.out.println(Differ.generate(filePath1, filePath2, stylish));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+    public  void run() {
+        try {
+            int exitCode = call();
+            System.exit(exitCode);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            System.exit(ERROR_EXIT_CODE);
         }
     }
+
+
     public static void main(String[] args) throws IOException {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);

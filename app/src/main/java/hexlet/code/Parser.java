@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -7,7 +8,7 @@ import java.io.IOException;
 import java.util.Map;
 
  class Parser {
-        public static Map<String, Object> parseContent(String content, String format) {
+        public static Map<String, Object> parseContent(String content, String format) throws JsonProcessingException {
             if (content == null || content.isEmpty()) {
                 return Map.of();
             }
@@ -20,13 +21,7 @@ import java.util.Map;
                 System.err.println("Неподдерживаемый формат: " + format);
                 return Map.of();
             }
-
-            try {
                 return mapper.readValue(content, new TypeReference<Map<String, Object>>() {
                  });
-            } catch (IOException e) {
-                System.err.println("Ошибка парсинга: " + e.getMessage());
-                return Map.of();
-            }
         }
      }

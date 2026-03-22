@@ -39,6 +39,10 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-annotations:2.12.4")
     implementation("com.fasterxml.jackson.core:jackson-core:2.15.0")
     implementation(group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-yaml", version = "2.13.4")
+    compileOnly("org.projectlombok:lombok:1.18.30")
+    annotationProcessor("org.projectlombok:lombok:1.18.30")
+    testCompileOnly("org.projectlombok:lombok:1.18.30")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.30")
 }
 
 kapt {

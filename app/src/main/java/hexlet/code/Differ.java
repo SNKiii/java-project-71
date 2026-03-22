@@ -1,14 +1,19 @@
 package hexlet.code;
 
 
-import java.util.HashMap;
+import java.io.IOException;
+import java.util.Comparator;
 import java.util.Map;
 
 public class Differ {
 
-    public static String generate(String filePath1, String filePath2, String formatName) throws Exception {
-        Map<String, Object> resultMap = new HashMap<>();
-            String contentOne = java.nio.file.Files.readString(java.nio.file.Paths.get(filePath1));
+    public static String generate(String filePath1, String filePath2, String nameFormat) throws IOException {
+
+        String formatName = switch (nameFormat) {
+            case "plain", "json" -> nameFormat;
+            default -> "standart";
+        };
+        String contentOne = java.nio.file.Files.readString(java.nio.file.Paths.get(filePath1));
             String formatOne;
             String formatTwo;
             if (filePath1.endsWith(".json")) {
@@ -28,62 +33,13 @@ public class Differ {
             System.err.println("Поддерживается только JSON или YAML");
             return null;
             }
-        Map<String, ?> mapJsonOne =  Parser.parseContent(contentOne, formatOne);
-        Map<String, ?> mapJsonTwo =  Parser.parseContent(contentTwo, formatTwo);
-        mapJsonOne.forEach((key, value) -> {
-            if (!mapJsonTwo.containsKey(key)) {
-                resultMap.put("remote #RAZDEL# " + key, value);
-            } else if (key != null) {
-                if (mapJsonTwo.get(key) != null && value != null) {
-                    if (Comparing.comparing(value, mapJsonTwo.get(key))) {
-                        resultMap.put("inchanges #RAZDEL# " + key, value);
-                        mapJsonTwo.remove(key);
-                    } else {
-                        resultMap.put("unfaithful one #RAZDEL# " + key + "abc1", value);
-                        resultMap.put("unfaithful two #RAZDEL# " + key, mapJsonTwo.get(key));
-                        mapJsonTwo.remove(key);
-                    }
-                } else if (value != null && mapJsonTwo.get(key) == null) {
-                    Object valueTwo = "null";
-                    if (Comparing.comparing(value, valueTwo)) {
-                        resultMap.put("inchanges #RAZDEL# " + key, value);
-                        mapJsonTwo.remove(key);
-                    } else {
-                        resultMap.put("unfaithful one #RAZDEL# " + key + "abc1", value);
-                        resultMap.put("unfaithful two #RAZDEL# " + key, valueTwo);
-                        mapJsonTwo.remove(key);
-                    }
-                } else if (value == null && mapJsonTwo.get(key) != null) {
-                    Object valueOne = "null";
-                    if (Comparing.comparing(valueOne, mapJsonTwo.get(key))) {
-                        resultMap.put("inchanges #RAZDEL# " + key, valueOne);
-                        mapJsonTwo.remove(key);
-                    } else {
-                        resultMap.put("unfaithful one #RAZDEL# " + key + "abc1", valueOne);
-                        resultMap.put("unfaithful two #RAZDEL# " + key, mapJsonTwo.get(key));
-                        mapJsonTwo.remove(key);
-                    }
-                }
-                }
-            });
-
-        mapJsonTwo.forEach((key, value) -> {
-            if (key != null && value != null) {
-                resultMap.put("add #RAZDEL# " + key, value);
-            }
-        });
-
-        if (resultMap.isEmpty()) {
+        Map<String, Object> mapJsonOne =  Parser.parseContent(contentOne, formatOne);
+        Map<String, Object> mapJsonTwo =  Parser.parseContent(contentTwo, formatTwo);
+        var list = Unterschied.unterschied(mapJsonOne, mapJsonTwo);
+        if (list.isEmpty()) {
             return "";
         }
-
-        Map<String, Object> filterMap = Filter.filter(resultMap);
-        filterMap.put("style", formatName);
-        return Formatter.selectFormat(filterMap);
-
-
-    }
-    public static String generate(String filePath1, String filePath2) throws Exception {
-        return generate(filePath1, filePath2, "standart");
+        list.sort(Comparator.comparing(Status::getKey));
+        return Formatter.selectFormat(Map.of(formatName, list));
     }
 }

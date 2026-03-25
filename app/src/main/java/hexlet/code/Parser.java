@@ -22,5 +22,5 @@ class Parser {
         }
         return mapper.readValue(content, new TypeReference<Map<String, Object>>() {
         });
-        }
-     }
+    }
+}

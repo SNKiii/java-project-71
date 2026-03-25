@@ -14,10 +14,10 @@ class ComparingTest {
 
     @Test
     void testComparePrimitiveValues() {
-        int EXPECTED = 5;
-        int DIFFERENT = 10;
-        assertTrue(Comparing.comparing(DIFFERENT, EXPECTED));
-        assertFalse(Comparing.comparing(EXPECTED, DIFFERENT));
+        int expected = 5;
+        int different = 10;
+        assertTrue(Comparing.comparing(different, expected));
+        assertFalse(Comparing.comparing(expected, different));
         assertTrue(Comparing.comparing("test", "test"));
         assertFalse(Comparing.comparing("test", "Test"));
     }

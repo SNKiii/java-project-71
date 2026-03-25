@@ -23,12 +23,12 @@ public class Unterschied {
                     }
                 } else if (value != null && mapTwo.get(key) == null) {
                     Object valueTwo = "null";
-                        list.add(new Status(Status.CHANGED, key, value, valueTwo));
-                        mapTwo.remove(key);
+                    list.add(new Status(Status.CHANGED, key, value, valueTwo));
+                    mapTwo.remove(key);
                 } else if (value == null && mapTwo.get(key) != null) {
                     Object valueOne = "null";
-                        list.add(new Status(Status.CHANGED, key, valueOne, mapTwo.get(key)));
-                        mapTwo.remove(key);
+                    list.add(new Status(Status.CHANGED, key, valueOne, mapTwo.get(key)));
+                    mapTwo.remove(key);
                 }
             }
         });

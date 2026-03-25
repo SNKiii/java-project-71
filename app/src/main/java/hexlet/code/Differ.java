@@ -19,19 +19,19 @@ public class Differ {
             formatOne = "json";
         } else if (filePath1.endsWith(".yaml") || filePath1.endsWith(".yml")) {
             formatOne = "yaml";
-            } else {
-                System.err.println("Поддерживается только JSON или YAML");
-                return null;
-            }
+        } else {
+            System.err.println("Поддерживается только JSON или YAML");
+            return null;
+        }
         String contentTwo = java.nio.file.Files.readString(java.nio.file.Paths.get(filePath2));
         if (filePath2.endsWith(".json")) {
             formatTwo = "json";
         } else if (filePath2.endsWith(".yaml") || filePath2.endsWith(".yml")) {
-                formatTwo = "yaml";
-            } else {
-                System.err.println("Поддерживается только JSON или YAML");
-                return null;
-            }
+            formatTwo = "yaml";
+        } else {
+            System.err.println("Поддерживается только JSON или YAML");
+            return null;
+        }
         Map<String, Object> mapJsonOne =  Parser.parseContent(contentOne, formatOne);
         Map<String, Object> mapJsonTwo =  Parser.parseContent(contentTwo, formatTwo);
         var list = Unterschied.unterschied(mapJsonOne, mapJsonTwo);

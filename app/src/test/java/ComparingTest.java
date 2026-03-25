@@ -14,22 +14,22 @@ class ComparingTest {
 
     @Test
     void testComparePrimitiveValues() {
-        final int EXPECTED_EQUAL = 5;
-        final int DIFFERENT_VALUE = 10;
-        assertTrue(Comparing.comparing(DIFFERENT_VALUE, EXPECTED_EQUAL));
-        assertFalse(Comparing.comparing(EXPECTED_EQUAL, DIFFERENT_VALUE));
+        int EXPECTED = 5;
+        int DIFFERENT = 10;
+        assertTrue(Comparing.comparing(DIFFERENT, EXPECTED));
+        assertFalse(Comparing.comparing(EXPECTED, DIFFERENT));
         assertTrue(Comparing.comparing("test", "test"));
         assertFalse(Comparing.comparing("test", "Test"));
     }
 
     @Test
     void testCompareLists() {
-        int numOne = 1;
-        int numTwo = 2;
-        int numThree = 3;
-        List<Integer> list1 = List.of(numOne, numTwo, numThree);
-        List<Integer> list2 = List.of(numOne, numTwo, numThree);
-        List<Integer> list3 = List.of(numThree, numTwo, numOne);
+        int NUMONE = 1;
+        int NUMTWO = 2;
+        int NUMTHREE = 3;
+        List<Integer> list1 = List.of(NUMONE, NUMTWO, NUMTHREE);
+        List<Integer> list2 = List.of(NUMONE, NUMTWO, NUMTHREE);
+        List<Integer> list3 = List.of(NUMTHREE, NUMTWO, NUMONE);
 
         assertTrue(Comparing.comparing(list1, list2));
         assertFalse(Comparing.comparing(list1, list3));

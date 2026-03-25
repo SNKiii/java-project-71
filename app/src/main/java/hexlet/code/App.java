@@ -18,6 +18,18 @@ public final class App implements Runnable, Callable<Integer> {
     private static final int SUCCESS_EXIT_CODE = 0;
     private static final int ERROR_EXIT_CODE = 1;
 
+    @Parameters(index = "0", paramLabel =  "filepath1", description = "path to first file")
+    private String filePath1;
+    @Parameters(index = "1", paramLabel =  "filepath2", description = "path to second file")
+    private String filePath2;
+    @Option(
+            names = {"-f", "--format"},
+            paramLabel = "format",
+            description = "output format [default: stylish]",
+            defaultValue = "standart"
+    )
+    private String stylish;
+
     @Override
     public Integer call() {
         try {
@@ -31,17 +43,6 @@ public final class App implements Runnable, Callable<Integer> {
         return SUCCESS_EXIT_CODE;
     }
 
-    @Parameters(index = "0", paramLabel =  "filepath1", description = "path to first file")
-    private String filePath1;
-    @Parameters(index = "1", paramLabel =  "filepath2", description = "path to second file")
-    private String filePath2;
-    @Option(
-            names = {"-f", "--format"},
-            paramLabel = "format",
-            description = "output format [default: stylish]",
-            defaultValue = "standart"
-    )
-    private String stylish;
     @Override
     public  void run() {
         try {

@@ -8,7 +8,6 @@ import java.util.Map;
 public class Differ {
 
     public static String generate(String filePath1, String filePath2, String nameFormat) throws IOException {
-
         String formatName = switch (nameFormat) {
             case "plain", "json" -> nameFormat;
             default -> "standart";
@@ -41,5 +40,9 @@ public class Differ {
         }
         list.sort(Comparator.comparing(Status::getKey));
         return Formatter.selectFormat(Map.of(formatName, list));
+    }
+
+    public static String generate(String filePath1, String filePath2) throws IOException {
+        return generate(filePath1, filePath2, "standart");
     }
 }

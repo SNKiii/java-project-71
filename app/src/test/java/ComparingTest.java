@@ -40,7 +40,7 @@ class ComparingTest {
     void testCompareMaps() {
         Map<String, Object> oneMap = Map.of("a", 1, "b", 2);
         Map<String, Object> twoMap = Map.of("a", 1, "b", 2);
-        Map<String, Object> threeMap = Map.of("a", 2, "b", 3);
+        Map<String, Object> threeMap = Map.of("a", 2, "b", NUM_THREE);
         Map<String, Object> map1 = oneMap;
         Map<String, Object> map2 = twoMap;
         Map<String, Object> map3 = threeMap;

@@ -11,25 +11,26 @@ import java.util.List;
 
 
 class ComparingTest {
+    private static final int EXPECTED_VALUE = 5;
+    private static final int DIFFERENT_VALUE = 10;
+    private static final int NUM_ONE = 1;
+    private static final int NUM_TWO = 2;
+    private static final int NUM_THREE = 3;
 
     @Test
     void testComparePrimitiveValues() {
-        int expected = 5;
-        int different = 10;
-        assertTrue(Comparing.comparing(different, expected));
-        assertFalse(Comparing.comparing(expected, different));
+        assertTrue(Comparing.comparing(DIFFERENT_VALUE, EXPECTED_VALUE));
+        assertFalse(Comparing.comparing(EXPECTED_VALUE, DIFFERENT_VALUE));
         assertTrue(Comparing.comparing("test", "test"));
         assertFalse(Comparing.comparing("test", "Test"));
     }
 
     @Test
     void testCompareLists() {
-        int NUMONE = 1;
-        int NUMTWO = 2;
-        int NUMTHREE = 3;
-        List<Integer> list1 = List.of(NUMONE, NUMTWO, NUMTHREE);
-        List<Integer> list2 = List.of(NUMONE, NUMTWO, NUMTHREE);
-        List<Integer> list3 = List.of(NUMTHREE, NUMTWO, NUMONE);
+
+        List<Integer> list1 = List.of(NUM_ONE, NUM_TWO, NUM_THREE);
+        List<Integer> list2 = List.of(NUM_ONE, NUM_TWO, NUM_THREE);
+        List<Integer> list3 = List.of(NUM_THREE, NUM_TWO, NUM_ONE);
 
         assertTrue(Comparing.comparing(list1, list2));
         assertFalse(Comparing.comparing(list1, list3));

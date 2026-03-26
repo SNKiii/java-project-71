@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
+//Сравнение парсированных данных
 public class Unterschied {
     public static List<Status> unterschied(
             Map<String, Object> mapOne, Map<String, Object> mapTwo) {

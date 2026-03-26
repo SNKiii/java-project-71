@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import java.util.Map;
 
+//Парсер json\yaml файлов
 class Parser {
     public static Map<String, Object> parseContent(String content, String format) throws JsonProcessingException {
         if (content == null || content.isEmpty()) {

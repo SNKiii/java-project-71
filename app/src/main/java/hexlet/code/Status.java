@@ -3,6 +3,7 @@ package hexlet.code;
 import lombok.Getter;
 import lombok.Setter;
 
+//Класс хранения данных при сравнении
 @Getter
 @Setter
 public class Status {

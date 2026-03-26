@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//json формат
 public class JsonFormat {
     public static String jsonFormater(List<Status> list) throws JsonProcessingException {
         Map<String, Object> map = new HashMap<>();

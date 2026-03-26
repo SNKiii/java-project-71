@@ -8,12 +8,17 @@ import picocli.CommandLine.Parameters;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
+//Проект сравнивает json\yaml файлы в 3 форматах:
+// * Standart
+// * plain
+// * json
+// Особенности: Значения первого файла всегда будут стоять выше\впереди, чем значения второго файла.
 @Command(name = "gendiff",
         description = "Compares two configuration files and shows a difference.",
         mixinStandardHelpOptions = true,
         versionProvider = VersionProvider.class)
 
-public final class App implements Runnable, Callable<Integer> {
+public final class App implements  Callable<Integer> {
 
     private static final int SUCCESS_EXIT_CODE = 0;
     private static final int ERROR_EXIT_CODE = 1;
@@ -26,7 +31,7 @@ public final class App implements Runnable, Callable<Integer> {
             names = {"-f", "--format"},
             paramLabel = "format",
             description = "output format [default: stylish]",
-            defaultValue = "standart"
+            defaultValue = "stylish"
     )
     private String stylish;
 
@@ -42,19 +47,6 @@ public final class App implements Runnable, Callable<Integer> {
 
         return SUCCESS_EXIT_CODE;
     }
-
-    @Override
-    public  void run() {
-        try {
-            int exitCode = call();
-            System.exit(exitCode);
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            System.exit(ERROR_EXIT_CODE);
-        }
-    }
-
-
     public static void main(String[] args) throws IOException {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);

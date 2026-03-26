@@ -4,6 +4,7 @@ import hexlet.code.Status;
 
 import java.util.List;
 
+//Стандартный формат
 public class StylishConversion {
 
     public static String defaultConvers(List<Status> list) {

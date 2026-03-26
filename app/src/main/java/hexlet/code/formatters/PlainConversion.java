@@ -5,7 +5,7 @@ import hexlet.code.Status;
 import java.util.List;
 import java.util.Map;
 
-
+//Плоский формат
 public class PlainConversion {
     public static String plainFormater(List<Status> list) {
         String plainFormat = "";

@@ -4,6 +4,7 @@ package hexlet.code;
 import java.util.List;
 import java.util.Map;
 
+//Сравнение значений, исходя из их типа
 public class Comparing {
 
     public static boolean comparing(Object valueOne, Object valueTwo) {

@@ -17,9 +17,9 @@ public class FormatterTest {
         String patchResult = "src/test/resources/true.formaters/StandartFormat";
         try {
             String trueResult = Files.readString(Paths.get(patchResult), StandardCharsets.UTF_8);
-            assertEquals(trueResult.stripTrailing().replace("\r\n", "\n"),
+            assertEquals(trueResult.stripTrailing(),
                     Differ.generate(pathOne, pathTwo, "standart"));
-            assertEquals(trueResult.stripTrailing().replace("\r\n", "\n"),
+            assertEquals(trueResult.stripTrailing(),
                     Differ.generate(pathOneYML, pathTwoYML, "standart"));
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -35,9 +35,9 @@ public class FormatterTest {
         String pathTwoYML = "src/test/resources/TwoYaml.yaml";
         try {
             String trueResult = Files.readString(Paths.get(patchResult), StandardCharsets.UTF_8);
-            assertEquals(trueResult.stripTrailing().replace("\r\n", "\n"),
+            assertEquals(trueResult.stripTrailing(),
                     Differ.generate(pathOne, pathTwo, "plain"));
-            assertEquals(trueResult.stripTrailing().replace("\r\n", "\n"),
+            assertEquals(trueResult.stripTrailing(),
                     Differ.generate(pathOneYML, pathTwoYML, "plain"));
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -53,9 +53,9 @@ public class FormatterTest {
         String pathTwoYML = "src/test/resources/TwoYaml.yaml";
         try {
             String trueResult = Files.readString(Paths.get(patchResult), StandardCharsets.UTF_8);
-            assertEquals(trueResult.stripTrailing().replace("\r\n", "\n"),
+            assertEquals(trueResult.stripTrailing(),
                     Differ.generate(pathOne, pathTwo, "json"));
-            assertEquals(trueResult.stripTrailing().replace("\r\n", "\n"),
+            assertEquals(trueResult.stripTrailing(),
                     Differ.generate(pathOneYML, pathTwoYML, "json"));
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -71,9 +71,9 @@ public class FormatterTest {
         String patchResult = "src/test/resources/true.formaters/StandartFormat";
         try {
             String trueResult = Files.readString(Paths.get(patchResult), StandardCharsets.UTF_8);
-            assertEquals(trueResult.stripTrailing().replace("\r\n", "\n"),
+            assertEquals(trueResult.stripTrailing(),
                     Differ.generate(pathOne, pathTwo, ""));
-            assertEquals(trueResult.stripTrailing().replace("\r\n", "\n"),
+            assertEquals(trueResult.stripTrailing(),
                     Differ.generate(pathOneYML, pathTwoYML, ""));
         } catch (Exception e) {
             throw new RuntimeException(e);

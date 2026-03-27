@@ -1,6 +1,7 @@
 package hexlet.code;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +39,7 @@ public class Unterschied {
                 list.add((new Status(Status.ADDED, key, value)));
             }
         });
+        list.sort(Comparator.comparing(Status::getKey));
         return list;
     }
 }

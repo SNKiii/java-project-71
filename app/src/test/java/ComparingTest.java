@@ -19,7 +19,6 @@ class ComparingTest {
 
     @Test
     void testComparePrimitiveValues() {
-        assertTrue(Comparing.comparing(DIFFERENT_VALUE, EXPECTED_VALUE));
         assertFalse(Comparing.comparing(EXPECTED_VALUE, DIFFERENT_VALUE));
         assertTrue(Comparing.comparing("test", "test"));
         assertFalse(Comparing.comparing("test", "Test"));

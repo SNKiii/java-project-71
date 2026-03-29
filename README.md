@@ -9,9 +9,9 @@ Standard format for comparing two JSON files.
 Standard format with more complex data:
 <img width="1838" height="466" alt="изображение" src="https://github.com/user-attachments/assets/e726f602-da67-4aee-a19a-e7908f98387c" />
 Comparisons in flat format. 
-The same data is used as above for the standard view.
+The same data is used as above for the standard view:
 <img width="1829" height="276" alt="изображение" src="https://github.com/user-attachments/assets/a0dbf182-adab-4fd8-9e3a-9eb9c17ca629" />
-JSON format for comparing two files. 
+JSON format for comparing two files:
 The first value after the "key" is the value of the first file, the next is the value of the second.
 <img width="1833" height="130" alt="изображение" src="https://github.com/user-attachments/assets/4068147c-72f2-4cf3-ba65-d74a74334787" />
 

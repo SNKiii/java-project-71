@@ -46,8 +46,8 @@ public class PlainConversion {
                 default -> throw new RuntimeException("Unknown node type: '" + obj.getStatusName() + "'");
             }
         }
-            return String.join("\n", plainList);
-        }
+        return String.join("\n", plainList);
     }
+}
 
 

@@ -13,6 +13,7 @@ public class Differ {
         }
         return filePath.substring(lastIndex + 1).toLowerCase();
     }
+
     public static String generate(String filePath1, String filePath2, String nameFormat) throws IOException {
         String contentOne = java.nio.file.Files.readString(java.nio.file.Paths.get(filePath1));
         String contentTwo = java.nio.file.Files.readString(java.nio.file.Paths.get(filePath2));

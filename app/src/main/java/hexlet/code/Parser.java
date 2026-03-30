@@ -15,7 +15,7 @@ class Parser {
         ObjectMapper mapper;
         if ("json".equalsIgnoreCase(format)) {
             mapper = new ObjectMapper();
-        } else if ("yaml".equalsIgnoreCase(format)) {
+        } else if ("yaml".equalsIgnoreCase(format) || "yml".equalsIgnoreCase(format)) {
             mapper = new ObjectMapper(new YAMLFactory());
         } else {
             System.err.println("Неподдерживаемый формат: " + format);

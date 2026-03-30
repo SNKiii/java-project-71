@@ -7,14 +7,11 @@ import java.util.Map;
 public class Differ {
 
     private static String getDataFormat(String filePath) {
-        if (filePath.endsWith(".json")) {
-            return "json";
-        } else if (filePath.endsWith(".yaml") || filePath.endsWith(".yml")) {
-            return "yaml";
-        } else {
-            System.err.println("Поддерживается только JSON или YAML");
-            return null;
+        int lastIndex = filePath.lastIndexOf('.');
+        if (lastIndex == -1 || lastIndex == filePath.length() - 1) {
+            return "";
         }
+        return filePath.substring(lastIndex + 1).toLowerCase();
     }
     public static String generate(String filePath1, String filePath2, String nameFormat) throws IOException {
         String contentOne = java.nio.file.Files.readString(java.nio.file.Paths.get(filePath1));

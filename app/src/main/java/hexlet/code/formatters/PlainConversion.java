@@ -2,119 +2,52 @@ package hexlet.code.formatters;
 
 import hexlet.code.Status;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-//Плоский формат
-public class PlainConversion {
-    public static String plainFormater(List<Status> list) {
-        String plainFormat = "";
 
+public class PlainConversion {
+
+    //Преобразователь объекта в строку
+    private static String convertString(Object obj) {
+        if (obj == null || obj.equals("null")) {
+            return "null";
+        }
+
+        if (obj instanceof Map || obj instanceof List) {
+            return "[complex value]";
+        }
+
+        if (obj instanceof String) {
+            return "'" + obj.toString() + "'";
+        }
+
+        return obj.toString();
+    }
+
+    //Плоский формат
+    public static String plainFormater(List<Status> list) {
+        List<String> plainList = new ArrayList<>();
         for (var obj : list) {
-            if (obj.getStatusName().equals(Status.DELETED)) {
-                plainFormat = plainFormat + "Property '" + obj.getKey() + "' was removed\n";
-            } else if (obj.getStatusName().equals(Status.ADDED)) {
-                if (obj.getOldValue() instanceof List
-                        ||
-                        obj.getOldValue() instanceof Map) {
-                    plainFormat = plainFormat + "Property '" + obj.getKey()
-                            +
-                            "' was added with value: [complex value]\n";
-                } else {
-                    if (obj.getOldValue() instanceof Integer
-                            ||
-                            obj.getOldValue() instanceof Boolean) {
-                        plainFormat = plainFormat + "Property '" + obj.getKey() + "' was added with value: "
-                                +
-                                obj.getOldValue() + "\n";
-                    } else {
-                        plainFormat = plainFormat + "Property '" + obj.getKey() + "' was added with value: '"
-                                +
-                                obj.getOldValue() + "'\n";
-                    }
+            switch (obj.getStatusName()) {
+                case Status.DELETED -> plainList.add("Property '" + obj.getKey() + "' was removed");
+                case Status.ADDED -> plainList.add("Property '" + obj.getKey()
+                        +
+                        "' was added with value: " + convertString(obj.getOldValue()));
+                case Status.CHANGED -> plainList.add("Property '" + obj.getKey()
+                        +
+                        "' was updated. From " + convertString(obj.getOldValue())
+                        +
+                        " to " + convertString(obj.getNewValue()));
+                case Status.UNCHANGED -> {
+                    continue;
                 }
-            } else if (obj.getStatusName().equals(Status.CHANGED)) {
-                if (obj.getNewValue() instanceof List
-                        ||
-                        obj.getNewValue() instanceof Map) {
-                    if (obj.getOldValue() instanceof List
-                            ||
-                            obj.getOldValue() instanceof Map) {
-                        plainFormat = plainFormat + "Property '" + obj.getKey()
-                                +
-                                "' was updated. From [complex value] to [complex value]\n";
-                    } else if (obj.getOldValue() instanceof Boolean
-                            ||
-                            obj.getOldValue() instanceof Integer
-                            ||
-                            obj.getOldValue().equals("null")) {
-                        plainFormat = plainFormat + "Property '" + obj.getKey()
-                                +
-                                "' was updated. From " + obj.getOldValue() + " to [complex value]\n";
-                    } else {
-                        plainFormat = plainFormat + "Property '"
-                                +
-                                obj.getKey() + "' was updated. From '" + obj.getOldValue() + "' to [complex value]\n";
-                    }
-                } else if (obj.getOldValue() instanceof List
-                        ||
-                        obj.getOldValue() instanceof Map) {
-                    if (obj.getNewValue() instanceof Boolean
-                            ||
-                            obj.getNewValue() instanceof Map
-                            ||
-                            obj.getNewValue().equals("null")) {
-                        plainFormat = plainFormat + "Property '"
-                                +
-                                obj.getKey() + "' was updated. From [complex value] to " + obj.getNewValue() + "\n";
-                    } else {
-                        plainFormat = plainFormat + "Property '"
-                                +
-                                obj.getKey() + "' was updated. From [complex value] to '" + obj.getNewValue() + "'\n";
-                    }
-                } else {
-                    if (obj.getNewValue() instanceof Boolean
-                            ||
-                            obj.getNewValue() instanceof Integer
-                            ||
-                            obj.getNewValue().equals("null")) {
-                        if (obj.getOldValue() instanceof Boolean
-                                ||
-                                obj.getOldValue() instanceof Integer
-                                ||
-                                obj.getOldValue().equals("null")) {
-                            plainFormat = plainFormat + "Property '"
-                                    +
-                                    obj.getKey() + "' was updated. From " + obj.getOldValue() + " to "
-                                    +
-                                    obj.getNewValue() + "\n";
-                        } else {
-                            plainFormat = plainFormat + "Property '"
-                                    +
-                                    obj.getKey() + "' was updated. From '"
-                                    +
-                                    obj.getOldValue() + "' to " + obj.getNewValue() + "\n";
-                        }
-                    } else if (obj.getOldValue() instanceof Boolean
-                            ||
-                            obj.getOldValue() instanceof Integer
-                            ||
-                            obj.getOldValue().equals("null")) {
-                        plainFormat = plainFormat + "Property '" + obj.getKey()
-                                +
-                                "' was updated. From " + obj.getOldValue() + " to '" + obj.getNewValue() + "'\n";
-                    } else {
-                        plainFormat = plainFormat + "Property '"
-                                +
-                                obj.getKey() + "' was updated. From '" + obj.getOldValue()
-                                +
-                                "' to '" + obj.getNewValue() + "'\n";
-                    }
-                }
+                default -> throw new RuntimeException("Unknown node type: '" + obj.getStatusName() + "'");
             }
         }
-        return plainFormat.stripTrailing();
+            return String.join("\n", plainList);
+        }
     }
-}
 
 

@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class FormatterTest {
+public class DifferTest {
     @Test
     void testStylishConversion() {
         String pathOne = "src/test/resources/JsonOne.json";
@@ -72,9 +72,9 @@ public class FormatterTest {
         try {
             String trueResult = Files.readString(Paths.get(patchResult), StandardCharsets.UTF_8);
             assertEquals(trueResult.stripTrailing(),
-                    Differ.generate(pathOne, pathTwo, ""));
+                    Differ.generate(pathOne, pathTwo));
             assertEquals(trueResult.stripTrailing(),
-                    Differ.generate(pathOneYML, pathTwoYML, ""));
+                    Differ.generate(pathOneYML, pathTwoYML));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
